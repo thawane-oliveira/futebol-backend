@@ -11,10 +11,7 @@ class TeamsService implements ITeamsService {
   }
 
   async getById(id: string): Promise<ITeam | null> {
-    if (id && Number(id)) {
-      return this.model.findByPk(Number(id));
-    }
-    throw new Error('Id inválido');
+    return this.model.findByPk(Number(id));
   }
 }
 
