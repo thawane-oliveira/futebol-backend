@@ -19,6 +19,19 @@ class UsersService {
     const token = tokenGenerate({ id, username, role, email });
     return token;
   };
+
+  // userRole = async (credentials: ILogin): Promise<string | null> => {
+  //   const data = await this.model.findOne({ where: { email: credentials.email } });
+  //   if (!data) return null;
+
+  //   const decryptPass = bcryptjs.compareSync(credentials.password, data.password);
+  //   if (!decryptPass) return null;
+
+  //   const { id, username, role, email } = data;
+
+  //   const token = tokenGenerate({ id, username, role, email });
+  //   return token;
+  // };
 }
 
 export default UsersService;

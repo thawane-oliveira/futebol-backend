@@ -13,6 +13,18 @@ class UsersController {
     }
     return res.status(200).json({ token });
   };
+
+  public userRole = async (req: Request, res: Response) => {
+    const { authorization } = req.headers;
+    const { userToken } = req.body;
+
+    if (authorization) {
+      // const role = await this._service.userRole();
+      console.log(userToken);
+
+      return res.status(200).json({ role: userToken.role });
+    }
+  };
 }
 
 export default UsersController;

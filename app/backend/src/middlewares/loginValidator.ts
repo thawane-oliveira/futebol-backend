@@ -1,4 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
+import { tokenValidate } from '../helpers/tokenCreate';
 
 const validateBody = (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
@@ -32,4 +33,19 @@ const validatePassword = (req: Request, res: Response, next: NextFunction) => {
   next();
 };
 
-export { validateBody, validateEmail, validatePassword };
+const validateToken = (req: Request, res: Response, next: NextFunction) => {
+  const { authorization } = req.headers;
+  if (!authorization) {
+    return res.status(401).json({ message: 'Token not found' });
+  }
+
+  try {
+    const decoded = tokenValidate(authorization);
+    req.body.userToken = decoded;
+    next();
+  } catch (error) {
+    return res.status(401).json({ message: 'Token must be a valid token' });
+  }
+};
+
+export { validateBody, validateEmail, validatePassword, validateToken };
