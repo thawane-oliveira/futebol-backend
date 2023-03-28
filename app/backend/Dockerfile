@@ -1,4 +1,4 @@
-# Usar a imagem node:16.14-alpine como base x
+# Usar a imagem node:16.14-alpine como base 
 
 # Mudar para o diretório de trabalho /app-backend
 
@@ -12,3 +12,15 @@
 
 # Configurar os comandos para iniciar a aplicação de acordo com as boas práticas
 # Dica: Leia a seção Docker e Docker-compose no README para mais informações
+
+FROM node:16.14-alpine
+
+WORKDIR /app-backend
+
+COPY . .
+
+RUN npm i
+
+EXPOSE 3001
+
+ENTRYPOINT [ "npm", "start" ]
