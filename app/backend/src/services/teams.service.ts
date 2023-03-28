@@ -1,10 +1,14 @@
-import Teams from '../database/models/Teams';
+import { ModelStatic } from 'sequelize';
+import { ITeamsService } from '../interfaces/ITeamsService';
+import { ITeam } from '../interfaces/ITeam';
+import TeamsModel from '../database/models/teams.model';
 
-const getTeamsService = async () => {
-  const data = await Teams.findAll();
-  return data;
-};
+class TeamsService implements ITeamsService {
+  protected model: ModelStatic<TeamsModel> = TeamsModel;
 
-const xablau = () => null;
+  async getAll(): Promise<ITeam[]> {
+    return this.model.findAll();
+  }
+}
 
-export { xablau, getTeamsService };
+export default TeamsService;

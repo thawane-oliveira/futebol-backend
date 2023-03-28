@@ -1,11 +1,13 @@
 import { Request, Response } from 'express';
-import { getTeamsService } from '../services/teams.service';
+import TeamsService from '../services/teams.service';
 
-const getAllTeams = async (_req: Request, res: Response) => {
-  const posts = await getTeamsService();
-  return res.status(200).json(posts);
-};
+class TeamsController {
+  constructor(private _service = new TeamsService()) { }
 
-const xablau = () => null;
+  public getAll = async (_req: Request, res: Response) => {
+    const posts = await this._service.getAll();
+    return res.status(200).json(posts);
+  };
+}
 
-export { getAllTeams, xablau };
+export default TeamsController;
