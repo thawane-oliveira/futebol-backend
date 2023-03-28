@@ -8,6 +8,9 @@ class UsersController {
     const credentials = req.body;
 
     const token = await this._service.login(credentials);
+    if (token === null) {
+      return res.status(401).json({ message: 'Invalid email or password' });
+    }
     return res.status(200).json({ token });
   };
 }
