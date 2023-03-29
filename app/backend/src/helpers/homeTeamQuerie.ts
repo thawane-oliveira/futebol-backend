@@ -16,10 +16,9 @@ const homeQuery = `SELECT
         WHEN m.home_team_goals = m.away_team_goals THEN 1
         ELSE 0
     END) / (COUNT(*) * 3) * 100), 2) AS CHAR) AS efficiency
-FROM    teams AS t        JOIN
+FROM    teams AS t        INNER JOIN
     matches AS m ON m.home_team_id = t.id
     WHERE m.in_progress = FALSE
 GROUP BY name
-ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC, goalsOwn DESC;
-`;
+ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC;`;
 export default homeQuery;

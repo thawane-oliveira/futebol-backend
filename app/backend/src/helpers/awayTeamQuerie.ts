@@ -19,10 +19,10 @@ const awayQuery = `SELECT
     END) / (COUNT(*) * 3) * 100), 2) AS CHAR) AS efficiency
 FROM
     teams AS t
-        JOIN
+        INNER JOIN
     matches AS m ON m.away_team_id = t.id
     WHERE m.in_progress = FALSE
 GROUP BY name
-ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC, goalsOwn DESC;`;
+ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC;`;
 
 export default awayQuery;

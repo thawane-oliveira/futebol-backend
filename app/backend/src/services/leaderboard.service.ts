@@ -10,6 +10,11 @@ class LeaderboardService {
     return results as ILeaderboard[];
   }
 
+  async getAwayResults(): Promise<ILeaderboard[]> {
+    const [results] = await this.model.query(homeQuery);
+    return results as ILeaderboard[];
+  }
+
   // async getRanking(): Promise<string> {
   //   const allMatches = await this.getFinishedMatches();
 
