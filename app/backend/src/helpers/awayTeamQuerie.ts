@@ -11,7 +11,7 @@ const awayQuery = `SELECT
     CAST(SUM(m.away_team_goals < m.home_team_goals) AS CHAR) AS totalLosses,
     CAST(SUM(m.away_team_goals) AS CHAR) AS goalsFavor,
     CAST(SUM(m.home_team_goals) AS CHAR) AS goalsOwn,
-    CAST((SUM(m.away_team_goals) - SUM(m.home_team_goals)) AS CHAR) AS goalsBalance,
+    CAST((SUM(m.away_team_goals) - SUM(m.home_team_goals)) AS SIGNED) AS goalsBalance,
     CAST(ROUND((SUM(CASE
         WHEN m.away_team_goals > m.home_team_goals THEN 3
         WHEN m.away_team_goals = m.home_team_goals THEN 1
@@ -23,6 +23,6 @@ FROM
     matches AS m ON m.away_team_id = t.id
     WHERE m.in_progress = FALSE
 GROUP BY name
-ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC;`;
+ORDER BY totalPoints DESC, totalVictories DESC, goalsBalance DESC, goalsFavor DESC, goalsOwn DESC;`;
 
 export default awayQuery;
