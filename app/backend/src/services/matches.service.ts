@@ -2,7 +2,6 @@ import { ModelStatic, Op } from 'sequelize';
 import { IMatchService } from '../interfaces/IMatchService';
 import Teams from '../database/models/teams.model';
 import MatchesModel from '../database/models/matches.model';
-// import { IMatch } from '../interfaces/IMatch';
 
 class MatchesService implements IMatchService {
   protected model: ModelStatic<MatchesModel> = MatchesModel;
@@ -27,6 +26,10 @@ class MatchesService implements IMatchService {
       { model: Teams, as: 'awayTeam', attributes: ['teamName'] },
     ],
     where: { [Op.and]: [{ inProgress: verifyProgress }] } });
+  }
+
+  async finishMatch(id: number): Promise<number[]> {
+    return this.model.update({ inProgress: false }, { where: { id } });
   }
 }
 
