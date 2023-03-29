@@ -19,9 +19,6 @@ class UsersController {
     const { userToken } = req.body;
 
     if (authorization) {
-      // const role = await this._service.userRole();
-      console.log(userToken);
-
       return res.status(200).json({ role: userToken.role });
     }
   };
