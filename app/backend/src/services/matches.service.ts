@@ -1,4 +1,6 @@
 import { ModelStatic, Op } from 'sequelize';
+import { INewMatch } from '../interfaces/INewMatch';
+import { ICreatedMatch } from '../interfaces/ICreatedMatch';
 import { IMatchService } from '../interfaces/IMatchService';
 import { INewInfo } from '../interfaces/INewInfo';
 import Teams from '../database/models/teams.model';
@@ -31,6 +33,14 @@ class MatchesService implements IMatchService {
       ],
       where: { [Op.and]: [{ inProgress: verifyProgress }] },
     });
+  }
+
+  async createMatch(newMatch: INewMatch): Promise<ICreatedMatch> {
+    const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = newMatch;
+    const data = await this.model.create({
+      homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true,
+    });
+    return data;
   }
 
   async finishMatch(id: number): Promise<number[]> {

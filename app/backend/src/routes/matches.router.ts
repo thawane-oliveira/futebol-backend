@@ -10,6 +10,12 @@ const matchesController = new MatchesController(matchesService);
 
 router.get('/', (req: Request, res: Response) => matchesController.getAll(req, res));
 
+router.post(
+  '/',
+  validateToken,
+  (req: Request, res: Response) => matchesController.createMatch(req, res),
+);
+
 router.patch(
   '/:id',
   validateToken,

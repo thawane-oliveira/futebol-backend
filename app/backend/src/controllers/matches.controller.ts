@@ -15,6 +15,13 @@ class MatchesController {
     return res.status(200).json(filteredMatches);
   };
 
+  public createMatch = async (req: Request, res: Response) => {
+    const newMatch = req.body;
+
+    const createdMatch = await this._service.createMatch(newMatch);
+    return res.status(201).json(createdMatch);
+  };
+
   public updateMatch = async (req: Request, res: Response) => {
     const { id } = req.params;
     const newInfo = req.body;
