@@ -15,6 +15,14 @@ class MatchesController {
     return res.status(200).json(filteredMatches);
   };
 
+  public updateMatch = async (req: Request, res: Response) => {
+    const { id } = req.params;
+    const newInfo = req.body;
+
+    await this._service.updateMatch(Number(id), newInfo);
+    return res.status(200).json({ message: 'Updated' });
+  };
+
   public finishMatch = async (req: Request, res: Response) => {
     const { id } = req.params;
 

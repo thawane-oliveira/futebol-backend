@@ -11,6 +11,12 @@ const matchesController = new MatchesController(matchesService);
 router.get('/', (req: Request, res: Response) => matchesController.getAll(req, res));
 
 router.patch(
+  '/:id',
+  validateToken,
+  (req: Request, res: Response) => matchesController.updateMatch(req, res),
+);
+
+router.patch(
   '/:id/finish',
   validateToken,
   (req: Request, res: Response) => matchesController.finishMatch(req, res),
