@@ -1,4 +1,5 @@
 import { ModelStatic, Op } from 'sequelize';
+import { INewError } from '../interfaces/INewError';
 import { INewMatch } from '../interfaces/INewMatch';
 import { ICreatedMatch } from '../interfaces/ICreatedMatch';
 import { IMatchService } from '../interfaces/IMatchService';
@@ -35,8 +36,17 @@ class MatchesService implements IMatchService {
     });
   }
 
-  async createMatch(newMatch: INewMatch): Promise<ICreatedMatch> {
+  async createMatch(newMatch: INewMatch): Promise<ICreatedMatch | INewError> {
     const { homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals } = newMatch;
+
+    const checkHomeTeam = await this.model.findOne({ where: { homeTeamId } });
+
+    const checkAwayTeam = await this.model.findOne({ where: { awayTeamId } });
+
+    if (!checkAwayTeam || !checkHomeTeam) {
+      return { status: 404, message: 'There is no team with such id!' };
+    }
+
     const data = await this.model.create({
       homeTeamId, awayTeamId, homeTeamGoals, awayTeamGoals, inProgress: true,
     });
