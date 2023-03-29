@@ -1,3 +1,4 @@
+import awayQuery from '../helpers/awayTeamQuerie';
 import Model from '../database/models';
 import homeQuery from '../helpers/homeTeamQuerie';
 import ILeaderboard from '../interfaces/ILeaderboard';
@@ -11,7 +12,7 @@ class LeaderboardService {
   }
 
   async getAwayResults(): Promise<ILeaderboard[]> {
-    const [results] = await this.model.query(homeQuery);
+    const [results] = await this.model.query(awayQuery);
     return results as ILeaderboard[];
   }
 }
