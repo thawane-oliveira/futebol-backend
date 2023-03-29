@@ -27,4 +27,5 @@ router.patch(
   validateToken,
   (req: Request, res: Response) => matchesController.finishMatch(req, res),
 );
+
 export default router;

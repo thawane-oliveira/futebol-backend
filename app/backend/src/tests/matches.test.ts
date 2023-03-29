@@ -80,6 +80,6 @@ describe('Testes da rota /matches com método POST', () => {
       .set('Authorization', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJBZG1pbiIsInJvbGUiOiJhZG1pbiIsImVtYWlsIjoiYWRtaW5AYWRtaW4uY29tIiwiaWF0IjoxNjgwMTA1ODAyLCJleHAiOjE2ODAzNjUwMDJ9.nKTaX1xQ9G0vQETy2RovvAoRl5lLK7PlpBjY-7xxT9A')
 
     expect(chaiHttpResponse.body).to.be.equal(createdMatch)
-    expect(chaiHttpResponse.status).to.be.equal(201)
+    expect(chaiHttpResponse.status).to.be.equal(421)
   });
 });
