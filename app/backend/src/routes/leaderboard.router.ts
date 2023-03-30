@@ -8,6 +8,11 @@ const leaderboardService = new LeaderboardService();
 const leaderboardController = new LeaderboardController(leaderboardService);
 
 router.get(
+  '/',
+  (req: Request, res: Response) => leaderboardController.getAllResults(req, res),
+);
+
+router.get(
   '/home',
   (req: Request, res: Response) => leaderboardController.getHomeResults(req, res),
 );
